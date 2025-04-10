@@ -22,18 +22,11 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
-        // $total_price_usd = $this->faker->numberBetween(55, 100);
-        // $total_price_bs  = $this->faker->numberBetween(30, 50);
-
         return [
             'client_id'            => Client::inRandomOrder()->first(),
             'exchange_rate'        => ExchangeRate::inRandomOrder()->first()->exchange_rate,
             'amount_iva'           => 0,
             'payment_method'       => 'cash',
-            // 'total_price_usd'      => $total_price_usd,
-            // 'total_price_bs'       => $total_price_bs,
-            // 'total_cost_usd'       => $total_price_usd - ($total_price_usd * (30 / 100)),
-            // 'total_cost_bs'        => $total_price_bs - ($total_price_usd * (30 / 100)),
         ];
     }
 }

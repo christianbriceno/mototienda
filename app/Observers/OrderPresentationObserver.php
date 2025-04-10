@@ -6,7 +6,6 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderPresentation;
 use App\Models\Presentation;
-use App\Models\Statu;
 
 class OrderPresentationObserver
 {
@@ -95,22 +94,41 @@ class OrderPresentationObserver
     {
         $order = Order::where('id', $orderPresentation->order->id)->first();
 
-        $totalPriceUsd           = round($order->orderPresentations->sum('sub_total_unit_price'), 2);
-        $totalPriceBs            = round($totalPriceUsd * $order->exchange_rate, 2);
-        $totalCostUsd            = round($order->orderPresentations->sum('sub_total_unit_cost'), 2);
-        $totalCostBs             = round($totalCostUsd * $order->exchange_rate, 2);
-        $totalPriceUsdWithoutIva = round($order->orderPresentations->sum('sub_total_unit_price_without_iva'), 2);
-        $totalPriceBsWithoutIva  = round($totalPriceUsdWithoutIva * $order->exchange_rate, 2);
-        $amountIva               = round($totalPriceUsd - $totalPriceUsdWithoutIva, 2);
+        $totalPriceUsd = $order->orderPresentations->sum('sub_total_unit_price');
+        $totalPriceBs  = $totalPriceUsd * $order->exchange_rate;
+        $totalCostUsd  = $order->orderPresentations->sum('sub_total_unit_cost');
+        $totalCostBs   = $totalCostUsd * $order->exchange_rate;
+        $totalPriceUsdWithoutIva = $order->orderPresentations->sum('sub_total_unit_price_without_iva');
+        $totalPriceBsWithoutIva = $totalPriceUsdWithoutIva * $order->exchange_rate;
+        $amountIva = $totalPriceUsd - $totalPriceUsdWithoutIva;
 
-        $order->total_price_usd  = $totalPriceUsd;
-        $order->total_price_bs   = $totalPriceBs;
-        $order->total_cost_usd   = $totalCostUsd;
-        $order->total_cost_bs    = $totalCostBs;
+        $order->total_price_usd = $totalPriceUsd;
+        $order->total_price_bs  = $totalPriceBs;
+        $order->total_cost_usd  = $totalCostUsd;
+        $order->total_cost_bs   = $totalCostBs;
         $order->total_price_usd_without_iva = $totalPriceUsdWithoutIva;
         $order->total_price_bs_without_iva  = $totalPriceBsWithoutIva;
         $order->amount_iva = $amountIva;
 
         $order->saveQuietly();
+
+        $this->updatingInvoiceTotals($order);
+    }
+
+    /**
+     * calculate costs the invoice
+     *
+     * @param Order $order
+     * @return void
+     */
+    public function updatingInvoiceTotals(Order $order): void
+    {
+        $invoice = Invoice::where('order_id', $order->id)->first();
+
+        $invoice->amount_iva        = $order->amount_iva ?? 0;
+        $invoice->total_with_iva    = $order->total_price_usd ?? 0;
+        $invoice->total_without_iva = $order->total_price_usd_without_iva ?? 0;
+
+        $invoice->saveQuietly();
     }
 }

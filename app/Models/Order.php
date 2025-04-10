@@ -47,7 +47,7 @@ class Order extends Model
     }
 
     /**
-     * Undocumented function
+     * The presentations that belong to the order.
      *
      * @return HasMany
      */

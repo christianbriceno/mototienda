@@ -38,7 +38,7 @@ class OrderPresentation extends Model
     ];
 
     /**
-     * Undocumented function
+     * Get the order that owns the orderPresentations.
      *
      * @return BelongsTo
      */
@@ -48,7 +48,7 @@ class OrderPresentation extends Model
     }
 
     /**
-     * Undocumented function
+     * Get the presentation that owns the orderPresentations.
      *
      * @return BelongsTo
      */

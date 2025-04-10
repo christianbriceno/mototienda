@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Sex extends Model
+class Store extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -17,13 +18,12 @@ class Sex extends Model
      */
     protected $fillable = [
         'name',
+        'rif',
+        'address',
+        'email',
+        'whatsapp',
+        'facebook',
+        'instagram',
+        'logo'
     ];
-
-    /**
-     * Get the clients for the sex.
-     */
-    public function clients()
-    {
-        return $this->hasMany(Client::class);
-    }
 }

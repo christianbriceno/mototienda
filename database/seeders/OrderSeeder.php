@@ -15,7 +15,7 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $order = Order::factory()->create();
+        $order  = Order::factory()->create();
 
         $orderPresentations = OrderPresentation::factory(2)->create([
             'order_id' => $order,
@@ -34,9 +34,5 @@ class OrderSeeder extends Seeder
             'total_cost_bs'   => $totalCostUsd * $order->exchange_rate,
             'amount_iva' => $totalPriceUsd - ($totalPriceUsd / (1.16))
         ]);
-
-        // $invoice = Invoice::factory()->create([
-        //     'order_id' => $order->id,
-        // ]);
     }
 }

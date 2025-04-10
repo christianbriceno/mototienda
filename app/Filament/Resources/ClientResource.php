@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PresentationResource\Pages;
-use App\Filament\Resources\PresentationResource\RelationManagers;
-use App\Models\Presentation;
+use App\Filament\Resources\ClientResource\Pages;
+use App\Filament\Resources\ClientResource\RelationManagers;
+use App\Models\Client;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,46 +13,43 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PresentationResource extends Resource
+class ClientResource extends Resource
 {
-    protected static ?string $model = Presentation::class;
+    protected static ?string $model = Client::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
-    protected static ?string $modelLabel = 'Presentación';
+    protected static ?string $modelLabel = 'Cliente';
 
-    protected static ?string $pluralModelLabel = 'Presentaciones';
+    protected static ?string $pluralModelLabel = 'Clientes';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationGroup = 'Tienda - Productos';
+    protected static ?string $navigationGroup = 'Tienda - Clientes';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nombre')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('code')
+                Forms\Components\TextInput::make('last_name')
+                    ->label('Apellido')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('cost')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('stock')
+                Forms\Components\TextInput::make('identification_card')
+                    ->label('Cedula')
                     ->required()
                     ->numeric(),
-                Forms\Components\FileUpload::make('photo')
-                    ->label('Foto')
-                    ->image()
-                    ->imageEditor()
-                    ->required(),
+                Forms\Components\Select::make('sex_id')
+                    ->label('Sexo')
+                    ->relationship('sex', 'name'),
+                Forms\Components\TextInput::make('address')
+                    ->label('Dirección')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -60,22 +57,23 @@ class PresentationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo')
-                    ->label('Foto')
-                    ->rounded(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('code')
+                Tables\Columns\TextColumn::make('last_name')
+                    ->label('Apellido')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cost')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('stock')
+                Tables\Columns\TextColumn::make('identification_card')
+                    ->label('Cedula')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('sex.name')
+                    ->label('Sexo')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Dirección')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -112,9 +110,9 @@ class PresentationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPresentations::route('/'),
-            'create' => Pages\CreatePresentation::route('/create'),
-            'edit' => Pages\EditPresentation::route('/{record}/edit'),
+            'index' => Pages\ListClients::route('/'),
+            'create' => Pages\CreateClient::route('/create'),
+            'edit' => Pages\EditClient::route('/{record}/edit'),
         ];
     }
 }

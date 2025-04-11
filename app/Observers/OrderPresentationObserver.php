@@ -23,6 +23,7 @@ class OrderPresentationObserver
     public function creating(OrderPresentation $orderPresentation): void
     {
         $this->addPresentation($orderPresentation, 'creating');
+        $this->decreaseStocks($orderPresentation);
     }
 
     /**
@@ -130,5 +131,21 @@ class OrderPresentationObserver
         $invoice->total_without_iva = $order->total_price_usd_without_iva ?? 0;
 
         $invoice->saveQuietly();
+    }
+
+    /**
+     * Decrease to stock the presentation
+     *
+     * @param OrderPresentation $orderPresentation
+     * @return void
+     */
+    public function decreaseStocks(OrderPresentation $orderPresentation)
+    {
+        $presentation = $orderPresentation->presentation()->first();
+        $presentationStock = $presentation->stock;
+        $quantyToDecrease = $orderPresentation->quantity;
+
+        $presentation->stock = $presentationStock - $quantyToDecrease;
+        $presentation->saveQuietly();
     }
 }

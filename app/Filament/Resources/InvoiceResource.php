@@ -24,7 +24,7 @@ class InvoiceResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Facturas';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $navigationGroup = 'Tienda - Pedidos';
 

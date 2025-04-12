@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
+use App\Filament\Resources\OrderResource\RelationManagers\BuyerRelationManager;
 use App\Filament\Resources\OrderResource\RelationManagers\PresentationsRelationManager;
+use App\Filament\Resources\OrderResource\RelationManagers\PaymentMethodRelationManager;
+use App\Filament\Resources\OrderResource\RelationManagers\InvoiceRelationManager;
 use App\Models\Order;
 use App\Models\PaymentMethod;
 use App\Models\Presentation;
@@ -229,8 +232,10 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // BuyerRelationManager::class,
-            PresentationsRelationManager::class
+            BuyerRelationManager::class,
+            PresentationsRelationManager::class,
+            PaymentMethodRelationManager::class,
+            InvoiceRelationManager::class,
         ];
     }
 

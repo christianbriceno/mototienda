@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
@@ -39,11 +40,27 @@ class Order extends Model
     // protected $with = ['orderPresentations'];
 
     /**
+     * Get the invoice associated with the user.
+     */
+    public function invoice(): HasOne
+    {
+        return $this->hasOne(Invoice::class);
+    }
+
+    /**
      * Get the buyer that owns the order.
      */
     public function buyer(): BelongsTo
     {
         return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    /**
+     * Get the paymentMethod that owns the order.
+     */
+    public function paymentMethod(): BelongsTo
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method', 'name');
     }
 
     /**

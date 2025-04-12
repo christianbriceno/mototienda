@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PaymentMethodResource\Pages;
 use App\Filament\Resources\PaymentMethodResource\RelationManagers;
+use App\Filament\Resources\PaymentMethodResource\RelationManagers\OrdersRelationManager;
 use App\Models\PaymentMethod;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -70,7 +71,7 @@ class PaymentMethodResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            OrdersRelationManager::class,
         ];
     }
 

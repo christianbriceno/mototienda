@@ -18,11 +18,13 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'last_name' => $this->faker->lastName(),
+            'name'                => $this->faker->name(),
+            'last_name'           => $this->faker->lastName(),
             'identification_card' => $this->faker->numberBetween(0, 100000000),
-            'sex_id' => Sex::inRandomOrder()->first(),
-            'address' => $this->faker->address(),
+            'sex_id'              => Sex::inRandomOrder()->first(),
+            'address'             => $this->faker->address(),
+            'email'               => fake()->unique()->safeEmail(),
+            'phone'               => $this->faker->phoneNumber(),
         ];
     }
 }

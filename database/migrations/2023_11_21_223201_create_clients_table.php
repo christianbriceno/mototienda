@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('last_name', 100);
             $table->integer('identification_card')->unique();
             $table->foreignId('sex_id')->constrained('sexes');
-            $table->string('address', 255);
+            $table->string('address', 255)->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

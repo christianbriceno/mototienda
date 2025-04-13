@@ -22,6 +22,8 @@ class Client extends Model
         'identification_card',
         'sex_id',
         'address',
+        'email',
+        'phone',
     ];
 
     /**

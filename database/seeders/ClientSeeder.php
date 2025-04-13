@@ -13,6 +13,13 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::factory(5)->create();
+        Client::factory()->create([
+            'name'                => config('permission.consumidor_final_name'),
+            'last_name'           => config('permission.consumidor_final_last_name'),
+            'identification_card' => config('permission.consumidor_final_identification_card'),
+            'address'             => config('permission.consumidor_final_address'),
+            'email'               => config('permission.consumidor_final_email'),
+            'phone'               => config('permission.consumidor_final_phone'),
+        ]);
     }
 }

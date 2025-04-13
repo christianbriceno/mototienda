@@ -45,10 +45,17 @@ class ClientResource extends Resource
                     ->numeric(),
                 Forms\Components\Select::make('sex_id')
                     ->label('Sexo')
+                    ->required()
                     ->relationship('sex', 'name'),
                 Forms\Components\TextInput::make('address')
                     ->label('Dirección')
-                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->label('Correo')
+                    ->email()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('phone')
+                    ->label('Telefono')
                     ->maxLength(255),
             ]);
     }
@@ -73,6 +80,12 @@ class ClientResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->label('Dirección')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Correo')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
+                    ->label('Telefono')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

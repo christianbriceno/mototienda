@@ -128,7 +128,20 @@ class OrderResource extends Resource
                     ->money('USD')
                     ->summarize(Sum::make()->label('Total IVA')->money('USD')),
 
-                Tables\Columns\TextColumn::make('ganancia')
+                Tables\Columns\TextColumn::make('profit_paid_tax')
+                    ->label('Ganancia pagado el iva')
+                    ->default(fn(Order $record) => ($record->total_price_usd - ($record->total_cost_usd + $record->amount_iva)))
+                    // ->visible(function () {
+                    //     return auth()->user()->roles->first()->level <= Role::LEVEL_ADMIN;
+                    // })
+                    ->money('USD')
+                    ->summarize(Summarizer::make()
+                        ->label('Ganancia')
+                        ->money('USD')
+                        ->using(fn(Builder $query) => ($query->sum('total_price_usd') - ($query->sum('total_cost_usd') + $query->sum('amount_iva'))))),
+
+                Tables\Columns\TextColumn::make('profit_without_paying_tax')
+                    ->label('Ganancia sin pagar iva')
                     ->default(fn(Order $record) => ($record->total_price_usd - $record->total_cost_usd))
                     // ->visible(function () {
                     //     return auth()->user()->roles->first()->level <= Role::LEVEL_ADMIN;

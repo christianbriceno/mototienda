@@ -60,8 +60,9 @@
 <body>
     <div class="container-fluid">
         <div class="text-center">
-            <p class="mb-1 text-uppercase"><strong>SENIAT</strong></p>
-            <p class="mb-1 text-uppercase">J-{{ $invoice->issuer_rif }}</p>
+            {{-- <p class="mb-1 text-uppercase"><strong>SENIAT</strong></p> --}}
+            <p class="mb-1 text-uppercase text-center"><strong>***TIENDA***</strong></p>
+            <p class="mb-1 text-uppercase">{{ $invoice->issuer_rif }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_name }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_address }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_phone_number }}</p>
@@ -70,7 +71,7 @@
         <br>
         <br>
 
-        <p class="mb-1 text-uppercase">***DATOS DEL CLIENTE***</p>
+        <p class="mb-1 text-uppercase">***CLIENTE***</p>
         @if ($invoice->receiver_name)
             <p class="mb-1 text-uppercase">{{ $invoice->receiver_name }}</p>
         @endif
@@ -92,7 +93,7 @@
         <br>
         <br>
 
-        <p class="mb-1 text-uppercase text-center"><strong>FACTURA</strong></p>
+        <p class="mb-1 text-uppercase text-center"><strong>***FACTURA***</strong></p>
         <table class="table table-borderless">
             <tbody class="">
                 <tr>
@@ -102,6 +103,10 @@
                 <tr>
                     <td class="text-start start"><p class="mb-1 text-uppercase">FECHA: {{$invoice->created_at->format('d-m-y')}}</p></th>
                     <td class="text-end end"><p class="mb-1 text-uppercase">HORA: {{$invoice->created_at->format('H:m')}}</p></td>
+                </tr>
+                <tr>
+                    <td class="text-start start"><p class="mb-1 text-uppercase">TASA DE CAMBIO VES: </p></td>
+                    <td class="text-end end"><p class="mb-1 text-uppercase">BS {{number_format($invoice->order->exchange_rate, 2) }}</p></td>
                 </tr>
             </tbody>
         </table>

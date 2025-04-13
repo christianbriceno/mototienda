@@ -15,13 +15,22 @@ class PaymentMethodSeeder extends Seeder
     {
         $paymentMethods = [
             [
-                'name' => 'cash',
+                'name' => 'Efectivo',
             ],
             [
-                'name' => 'transfer',
+                'name' => 'Transferencia',
             ],
             [
-                'name' => 'mobile_payment',
+                'name' => 'Pago móvil',
+            ],
+            [
+                'name' => 'Oro',
+            ],
+            [
+                'name' => 'Divisa',
+            ],
+            [
+                'name' => 'Usdt',
             ]
         ];
 

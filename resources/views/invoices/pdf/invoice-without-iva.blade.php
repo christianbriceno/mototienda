@@ -61,11 +61,13 @@
     <div class="container-fluid">
 
         <div class="text-center">
+            {{-- <p class="mb-1 text-uppercase"><strong>SENIAT</strong></p> --}}
             <p class="mb-1 text-uppercase text-center"><strong>***TIENDA***</strong></p>
+            <p class="mb-1 text-uppercase">{{ $invoice->issuer_rif }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_name }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_address }}</p>
-            <p class="mb-1 text-uppercase">{{ $invoice->issuer_email }}</p>
             <p class="mb-1 text-uppercase">{{ $invoice->issuer_phone_number }}</p>
+            <p class="mb-1 text-uppercase">{{ $invoice->issuer_email }}</p>
         </div>
         <br>
         <br>

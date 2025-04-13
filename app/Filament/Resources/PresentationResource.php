@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\PresentationExporter;
 use App\Filament\Resources\PresentationResource\Pages;
 use App\Filament\Resources\PresentationResource\RelationManagers;
 use App\Models\Presentation;
@@ -9,6 +10,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -31,10 +34,10 @@ class PresentationResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('code')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(100),
                 Forms\Components\TextInput::make('price')
@@ -48,11 +51,11 @@ class PresentationResource extends Resource
                 Forms\Components\TextInput::make('stock')
                     ->required()
                     ->numeric(),
-                Forms\Components\FileUpload::make('photo')
-                    ->label('Foto')
-                    ->image()
-                    ->imageEditor()
-                    ->required(),
+                // Forms\Components\FileUpload::make('photo')
+                //     ->label('Foto')
+                //     ->image()
+                //     ->imageEditor()
+                //     ->required(),
             ]);
     }
 
@@ -60,12 +63,12 @@ class PresentationResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo')
-                    ->label('Foto')
-                    ->rounded(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
+                // Tables\Columns\ImageColumn::make('photo')
+                //     ->label('Foto')
+                //     ->rounded(),
                 Tables\Columns\TextColumn::make('code')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money()
@@ -98,7 +101,12 @@ class PresentationResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(PresentationExporter::class)
                 ]),
+            ])->headerActions([
+                ExportAction::make()
+                    ->exporter(PresentationExporter::class)
             ]);
     }
 

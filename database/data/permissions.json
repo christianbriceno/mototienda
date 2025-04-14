@@ -76,6 +76,30 @@
 			{ "name": "Dashboard", "route_name": "dashboard", "level": 2 }
 		]
 	},
+	    {
+		"group": "Sex",
+		"labels": [
+			{ "name": "view-any Sex", "route_name": "sexes.index",   "level": 3 },
+			{ "name": "view Sex",     "route_name": "sexes.show",    "level": 3 },
+			{ "name": "create Sex",   "route_name": "sexes.create",  "level": 1 },
+			{ "name": "store Sex",    "route_name": "sexes.store",   "level": 1 },
+			{ "name": "edit Sex",     "route_name": "sexes.edit",    "level": 1 },
+			{ "name": "update Sex",   "route_name": "sexes.update",  "level": 1 },
+			{ "name": "delete Sex",   "route_name": "sexes.destroy", "level": 1 }
+		]
+	},
+	    {
+		"group": "Client",
+		"labels": [
+			{ "name": "view-any Client", "route_name": "clients.index",   "level": 3 },
+			{ "name": "view Client",     "route_name": "clients.show",    "level": 3 },
+			{ "name": "create Client",   "route_name": "clients.create",  "level": 2 },
+			{ "name": "store Client",    "route_name": "clients.store",   "level": 2 },
+			{ "name": "edit Client",     "route_name": "clients.edit",    "level": 2 },
+			{ "name": "update Client",   "route_name": "clients.update",  "level": 2 },
+			{ "name": "delete Client",   "route_name": "clients.destroy", "level": 1 }
+		]
+	},
     {
 		"group": "Store",
 		"labels": [

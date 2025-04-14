@@ -6,6 +6,7 @@ use App\Filament\Exports\StoreExporter;
 use App\Filament\Resources\StoreResource\Pages;
 use App\Filament\Resources\StoreResource\RelationManagers;
 use App\Models\Store;
+use App\Policies\StorePolicy;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -121,11 +122,13 @@ class StoreResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->visible(fn(): bool => auth()->user()->can('delete Store', StorePolicy::class)),
                 ]),
             ])->headerActions([
                 ExportAction::make()
                     ->exporter(StoreExporter::class)
+                    ->visible(fn(): bool => auth()->user()->can('create Store', StorePolicy::class))
             ]);
     }
 

@@ -6,6 +6,7 @@ use App\Filament\Exports\PresentationExporter;
 use App\Filament\Resources\PresentationResource\Pages;
 use App\Filament\Resources\PresentationResource\RelationManagers;
 use App\Models\Presentation;
+use App\Policies\PresentationPolicy;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -96,17 +97,22 @@ class PresentationResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->visible(fn(): bool => auth()->user()->can('delete Presentation', PresentationPolicy::class)),
                     ExportBulkAction::make()
                         ->exporter(PresentationExporter::class)
+                        ->visible(fn(): bool => auth()->user()->can('create Presentation', PresentationPolicy::class))
                 ]),
             ])->headerActions([
                 ExportAction::make()
                     ->exporter(PresentationExporter::class)
+                    ->visible(fn(): bool => auth()->user()->can('create Presentation', PresentationPolicy::class))
             ]);
     }
 

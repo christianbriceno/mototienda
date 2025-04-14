@@ -16,8 +16,8 @@ class DownloadInvoiceController extends Controller
      */
     public function download(Request $request, Invoice $invoice)
     {
-        // $pdf = Pdf::loadView('invoices.pdf.invoice', compact('invoice'));
-        $pdf = Pdf::loadView('invoices.pdf.invoice-without-iva', compact('invoice'));
+        $pdf = Pdf::loadView('invoices.pdf.invoice', compact('invoice'));
+        // $pdf = Pdf::loadView('invoices.pdf.invoice-without-iva', compact('invoice'));
         return $pdf->download('invoice' . $invoice->id);
     }
 

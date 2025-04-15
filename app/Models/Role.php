@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     const NAME_SUPER_ADMIN   = "Super Admin";
     const NAME_ADMIN         = "Administrador";
@@ -21,4 +23,17 @@ class Role extends SpatieRole
     const LEVEL_SELLER        = 2;
     const LEVEL_CLIENT        = 3;
     const LEVEL_GUEST         = 4;
+
+    /**
+     * Undocumented function
+     *
+     * @return LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['*'])
+            ->logOnlyDirty();
+        // Chain fluent methods for configuration options
+    }
 }

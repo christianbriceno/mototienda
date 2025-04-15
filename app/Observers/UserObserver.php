@@ -12,7 +12,20 @@ class UserObserver
     /**
      * Handle the User "created" event.
      */
-    public function created(User $user): void {}
+    public function created(User $user): void
+    {
+        $users = User::whereHas('roles', function (Builder $query) {
+            auth()->user()
+                ? $query->where('level', '<=', auth()->user()->roles->last()->level)
+                : $query->where('level', '<=', Role::LEVEL_ADMIN);
+        })->get();
+
+        Notification::make()
+            ->title('Nuevo usuario')
+            ->success()
+            ->body('Se registro exitosamente un nuevo usuario.')
+            ->sendToDatabase($users);
+    }
 
     /**
      * Handle the User "updated" event.

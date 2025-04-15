@@ -4,9 +4,7 @@ namespace App\Observers;
 
 use App\Models\Invoice;
 use App\Models\Order;
-use App\Models\Restaurant;
 use App\Models\Role;
-use App\Models\Statu;
 use App\Models\Store;
 use App\Models\User;
 use Filament\Notifications\Notification;
@@ -20,12 +18,37 @@ class OrderObserver
     public function created(Order $order): void
     {
         $this->creatingInvoice($order);
+
+        $users = User::whereHas('roles', function (Builder $query) {
+            auth()->user()
+                ? $query->where('level', '<=', auth()->user()->roles->last()->level)
+                : $query->where('level', '<=', Role::LEVEL_SELLER);
+        })->get();
+
+        Notification::make()
+            ->title('Nuevo pedido #' . $order->id)
+            ->success()
+            ->body('Se registro exitosamente un nuevo pedido.')
+            ->sendToDatabase($users);
     }
 
     /**
      * Handle the Order "updated" event.
      */
-    public function updated(Order $order): void {}
+    public function updated(Order $order): void
+    {
+        $users = User::whereHas('roles', function (Builder $query) {
+            auth()->user()
+                ? $query->where('level', '<=', auth()->user()->roles->last()->level)
+                : $query->where('level', '<=', Role::LEVEL_SELLER);
+        })->get();
+
+        Notification::make()
+            ->title('Estatus de pedido')
+            ->success()
+            ->body('El pedido #' . $order->id . ' cambió')
+            ->sendToDatabase($users);
+    }
 
     /**
      * Handle the Order "deleted" event.

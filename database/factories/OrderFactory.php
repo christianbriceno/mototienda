@@ -7,6 +7,7 @@ use App\Models\Delivery;
 use App\Models\ExchangeRate;
 use App\Models\Reservation;
 use App\Models\Statu;
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'store_id'             => Store::inRandomOrder()->first(),
             'client_id'            => Client::inRandomOrder()->first(),
             'exchange_rate'        => ExchangeRate::inRandomOrder()->first()->exchange_rate,
             'amount_iva'           => 0,

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('presentation_id')->constrained('presentations');
             $table->tinyInteger('item_line')->nullable();
             $table->tinyInteger('quantity');
+            $table->tinyInteger('auxiliary_quantity')->nullable();
             $table->float('unit_price');
             $table->float('unit_price_without_iva')->nullable()->default(0);
             $table->float('sub_total_unit_price');

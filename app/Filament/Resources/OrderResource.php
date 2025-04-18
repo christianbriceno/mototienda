@@ -8,11 +8,13 @@ use App\Filament\Resources\OrderResource\RelationManagers\PresentationsRelationM
 use App\Filament\Resources\OrderResource\RelationManagers\PaymentMethodRelationManager;
 use App\Filament\Resources\OrderResource\RelationManagers\InvoiceRelationManager;
 use App\Models\Order;
+use App\Models\OrderPresentation;
 use App\Models\PaymentMethod;
 use App\Models\Presentation;
 use App\Models\Role;
 use App\Models\Invoice;
 use App\Models\ExchangeRate;
+use App\Models\Store;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
@@ -55,11 +57,11 @@ class OrderResource extends Resource
                     ->schema([
                         Forms\Components\Section::make('Comprador')
                             ->schema(static::getDetailsFormSchema())
-                            ->columns(2),
+                            ->columns(3),
 
                         Forms\Components\Section::make('Presentaciones del pedido')
                             ->schema([
-                                static::getItemsRepeater(),
+                                static::getItemsRepeater()->deletable(false),
                             ]),
 
                         Forms\Components\Section::make('Detalle de pago')
@@ -269,6 +271,7 @@ class OrderResource extends Resource
     public static function getDetailsFormSchema(): array
     {
         return [
+            static::getStoreFormField(),
             static::getBuyerFormField(),
             static::getPaymentMethodFormField()
         ];
@@ -282,6 +285,7 @@ class OrderResource extends Resource
             ->schema([
                 static::getPresentationsFormField(),
                 static::getQuantityFormField(),
+                static::getAuxiliaryQuantityFormField(),
                 static::getUnitPriceFormField(),
                 static::getSubTotalUnitPriceFormField(),
                 static::getUnitPriceWithoutIvaFormField(),
@@ -313,15 +317,25 @@ class OrderResource extends Resource
             ->columns(5);
     }
 
+    public static function getStoreFormField(): Forms\Components\Select
+    {
+        return Forms\Components\Select::make('store_id')
+            ->relationship(
+                'store',
+                'name',
+            )
+            ->getOptionLabelFromRecordUsing(fn(Model $record) => "{$record->name}")
+            ->searchable(['name'])
+            ->preload()
+            ->required();
+    }
+
     public static function getBuyerFormField(): Forms\Components\Select
     {
         return Forms\Components\Select::make('client_id')
             ->relationship(
                 'buyer',
                 'name',
-                // modifyQueryUsing: fn(Builder $query) => $query->whereHas('roles', function (Builder $query) {
-                //     // return $query->where('level', '>', Role::LEVEL_ADMIN);
-                // })
             )
             ->getOptionLabelFromRecordUsing(fn(Model $record) => "{$record->name} - {$record->identification_card}")
             ->searchable(['name'])
@@ -350,7 +364,15 @@ class OrderResource extends Resource
                 $presentation = Presentation::find($state);
                 $unitPriceWithoutIva = round($presentation->price / (1.16), 2);
 
-                $set('quantity', 1 ?? null);
+                $order = Order::where('id', $get('id'))->first();
+
+                $orderPresentation = OrderPresentation::where([
+                    'presentation_id' => $presentation->id,
+                    'order_id' => $order?->id,
+                ])->first();
+
+                $set('quantity', $orderPresentation->quantity ?? 1);
+                $set('auxiliary_quantity', $orderPresentation->quantity ?? null);
 
                 $set('unit_price', $presentation?->price ?? null);
                 $set('unit_price_without_iva', $unitPriceWithoutIva ?? null);
@@ -382,6 +404,7 @@ class OrderResource extends Resource
             ->label('Cantidad')
             ->live(debounce: 800)
             ->numeric()
+            ->minValue(1)
             ->afterStateUpdated(function ($state, Set $set, Get $get) {
                 $set('sub_total_unit_price', $state * $get('unit_price') ?? null);
                 $set('sub_total_unit_price_without_iva', $state * $get('unit_price_without_iva') ?? null);
@@ -399,6 +422,17 @@ class OrderResource extends Resource
                 $set('../../total_cost_usd', null);
             })
             ->required();
+    }
+
+    public static function getAuxiliaryQuantityFormField(): Forms\Components\TextInput
+    {
+        return Forms\Components\TextInput::make('auxiliary_quantity')
+            ->label('Cantidad Auxiliar')
+            ->disabled()
+            ->dehydrated()
+            ->live()
+            ->numeric()
+            ->hidden();
     }
 
     public static function getUnitPriceFormField(): Forms\Components\TextInput

@@ -27,6 +27,7 @@ class OrderPresentationFactory extends Factory
             'presentation_id'        => $presentation->id,
             'item_line'              => null,
             'quantity'               => $quantity,
+            'auxiliary_quantity'     => $quantity,
             'unit_price'             => $presentation->price,
             'unit_price_without_iva' => round($presentation->price / 1.16, 2),
             'sub_total_unit_price'   => $presentation->price * $quantity,

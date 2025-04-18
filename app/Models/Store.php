@@ -30,6 +30,16 @@ class Store extends Model
     ];
 
     /**
+     * The presentations that belong to the order.
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
      * Undocumented function
      *
      * @return LogOptions

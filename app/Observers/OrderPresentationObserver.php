@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderPresentation;
 use App\Models\Presentation;
+use Illuminate\Support\Facades\Log;
 
 class OrderPresentationObserver
 {
@@ -15,6 +16,8 @@ class OrderPresentationObserver
     public function created(OrderPresentation $orderPresentation): void
     {
         $this->calculateOrderTotals($orderPresentation);
+        $orderPresentation->auxiliary_quantity = $orderPresentation->quantity;
+        $orderPresentation->saveQuietly();
     }
 
     /**
@@ -29,10 +32,7 @@ class OrderPresentationObserver
     /**
      * Handle the OrderPresentation "updated" event.
      */
-    public function updated(OrderPresentation $orderPresentation): void
-    {
-        //
-    }
+    public function updated(OrderPresentation $orderPresentation): void {}
 
     /**
      * Handle the OrderPresentation "updating" event.
@@ -40,6 +40,13 @@ class OrderPresentationObserver
     public function updating(OrderPresentation $orderPresentation): void
     {
         $this->addPresentation($orderPresentation, 'updating');
+
+        $this->IncreaseOrDecreaseStocks($orderPresentation);
+
+        //The value of the auxiliary quantity is updated at the end to avoid losing the value from the last purchase 
+        //of this product in this order
+        $orderPresentation->auxiliary_quantity = $orderPresentation->quantity;
+        $orderPresentation->saveQuietly();
     }
 
     /**
@@ -146,6 +153,22 @@ class OrderPresentationObserver
         $quantyToDecrease = $orderPresentation->quantity;
 
         $presentation->stock = $presentationStock - $quantyToDecrease;
+        $presentation->saveQuietly();
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param OrderPresentation $orderPresentation
+     * @return void
+     */
+    function IncreaseOrDecreaseStocks(OrderPresentation $orderPresentation)
+    {
+        $presentation = $orderPresentation->presentation()->first();
+        //Replenish stock of purchased presentations
+        $presentation->stock += $orderPresentation->auxiliary_quantity;
+        //Deducting new stock of purchased presentations
+        $presentation->stock -= $orderPresentation->quantity;
         $presentation->saveQuietly();
     }
 }

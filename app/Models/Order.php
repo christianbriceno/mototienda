@@ -22,6 +22,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
+        'store_id',
         'client_id',
         'payment_method',
         'exchange_rate',
@@ -47,6 +48,14 @@ class Order extends Model
     public function invoice(): HasOne
     {
         return $this->hasOne(Invoice::class);
+    }
+
+    /**
+     * Get the store that owns the order.
+     */
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class, 'store_id');
     }
 
     /**

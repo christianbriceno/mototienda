@@ -1,0 +1,175 @@
+[
+    {
+		"group": "User",
+		"labels": [
+			{ "name": "view-any User", "route_name": "users.index",   "level": 1 },
+			{ "name": "view User",     "route_name": "users.show",    "level": 1 },
+			{ "name": "edit User",     "route_name": "users.edit",    "level": 1 },
+			{ "name": "update User",   "route_name": "users.update",  "level": 1 },
+			{ "name": "create User",   "route_name": "users.create",  "level": 1 },
+			{ "name": "store User",    "route_name": "users.store",   "level": 1 },
+			{ "name": "delete User",   "route_name": "users.destroy", "level": 1 },
+			{ "name": "restore User",  "route_name": "users.restore", "level": 1 },
+			{ "name": "clean User",    "route_name": "users.clean",   "level": 1 }
+
+		]
+	},
+	{
+		"group": "Role",
+		"labels": [
+			{ "name": "view-any Role", "route_name": "roles.index",   "level": 1 },
+			{ "name": "view Role",     "route_name": "roles.show",    "level": 1 },
+			{ "name": "create Role",   "route_name": "roles.create",  "level": 0 },
+			{ "name": "store Role",    "route_name": "roles.store",   "level": 0 },
+			{ "name": "edit Role",     "route_name": "roles.edit",    "level": 0 },
+			{ "name": "update Role",   "route_name": "roles.update",  "level": 0 },
+			{ "name": "delete Role",   "route_name": "roles.destroy", "level": 0 },
+			{ "name": "restore Role",  "route_name": "roles.restore", "level": 0 },
+			{ "name": "clean Role",    "route_name": "roles.clean",   "level": 0 }
+		]
+	},
+    {
+		"group": "Permission",
+		"labels": [
+			{ "name": "view-any Permission", "route_name": "permissions.index",   "level": 1 },
+			{ "name": "view Permission",     "route_name": "permissions.show",    "level": 1 },
+			{ "name": "create Permission",   "route_name": "permissions.create",  "level": 0 },
+			{ "name": "store Permission",    "route_name": "permissions.store",   "level": 0 },
+			{ "name": "edit Permission",     "route_name": "permissions.edit",    "level": 0 },
+			{ "name": "update Permission",   "route_name": "permissions.update",  "level": 0 },
+			{ "name": "delete Permission",   "route_name": "permissions.destroy", "level": 0 },
+			{ "name": "restore Permission",  "route_name": "permissions.restore", "level": 0 },
+			{ "name": "clean Permission",    "route_name": "permissions.clean",   "level": 0 }
+		]
+	},
+    {
+		"group": "ActivityLog",
+		"labels": [
+			{ "name": "view-any ActivityLog", "route_name": "activity-log.index",   "level": 1 },
+			{ "name": "view ActivityLog",     "route_name": "activity-log.show",    "level": 1 },
+			{ "name": "create ActivityLog",   "route_name": "activity-log.create",  "level": 0 },
+			{ "name": "store ActivityLog",    "route_name": "activity-log.store",   "level": 0 },
+			{ "name": "edit ActivityLog",     "route_name": "activity-log.edit",    "level": 0 },
+			{ "name": "update ActivityLog",   "route_name": "activity-log.update",  "level": 0 },
+			{ "name": "delete ActivityLog",   "route_name": "activity-log.destroy", "level": 0 },
+			{ "name": "restore ActivityLog",  "route_name": "activity-log.restore", "level": 0 },
+			{ "name": "clean ActivityLog",    "route_name": "activity-log.clean",   "level": 0 }
+		]
+	},
+    {
+		"group": "Notify",
+		"labels": [
+			{ "name": "view-any Notify", "route_name": "notify.index",   "level": 1 },
+			{ "name": "view Notify",     "route_name": "notify.show",    "level": 1 },
+			{ "name": "create Notify",   "route_name": "notify.create",  "level": 0 },
+			{ "name": "store Notify",    "route_name": "notify.store",   "level": 0 },
+			{ "name": "edit Notify",     "route_name": "notify.edit",    "level": 0 },
+			{ "name": "update Notify",   "route_name": "notify.update",  "level": 0 },
+			{ "name": "delete Notify",   "route_name": "notify.destroy", "level": 0 },
+			{ "name": "restore Notify",  "route_name": "notify.restore", "level": 0 },
+			{ "name": "clean Notify",    "route_name": "notify.clean",   "level": 0 }
+		]
+	},
+	{
+		"group": "Dashboard",
+		"labels": [
+			{ "name": "Dashboard", "route_name": "dashboard", "level": 2 }
+		]
+	},
+	    {
+		"group": "Sex",
+		"labels": [
+			{ "name": "view-any Sex", "route_name": "sexes.index",   "level": 3 },
+			{ "name": "view Sex",     "route_name": "sexes.show",    "level": 3 },
+			{ "name": "create Sex",   "route_name": "sexes.create",  "level": 1 },
+			{ "name": "store Sex",    "route_name": "sexes.store",   "level": 1 },
+			{ "name": "edit Sex",     "route_name": "sexes.edit",    "level": 1 },
+			{ "name": "update Sex",   "route_name": "sexes.update",  "level": 1 },
+			{ "name": "delete Sex",   "route_name": "sexes.destroy", "level": 1 }
+		]
+	},
+	    {
+		"group": "Client",
+		"labels": [
+			{ "name": "view-any Client", "route_name": "clients.index",   "level": 3 },
+			{ "name": "view Client",     "route_name": "clients.show",    "level": 3 },
+			{ "name": "create Client",   "route_name": "clients.create",  "level": 2 },
+			{ "name": "store Client",    "route_name": "clients.store",   "level": 2 },
+			{ "name": "edit Client",     "route_name": "clients.edit",    "level": 2 },
+			{ "name": "update Client",   "route_name": "clients.update",  "level": 2 },
+			{ "name": "delete Client",   "route_name": "clients.destroy", "level": 1 }
+		]
+	},
+    {
+		"group": "Store",
+		"labels": [
+			{ "name": "view-any Store", "route_name": "stores.index",   "level": 3 },
+			{ "name": "view Store",     "route_name": "stores.show",    "level": 3 },
+			{ "name": "create Store",   "route_name": "stores.create",  "level": 1 },
+			{ "name": "store Store",    "route_name": "stores.store",   "level": 1 },
+			{ "name": "edit Store",     "route_name": "stores.edit",    "level": 1 },
+			{ "name": "update Store",   "route_name": "stores.update",  "level": 1 },
+			{ "name": "delete Store",   "route_name": "stores.destroy", "level": 1 }
+		]
+	},
+	{
+		"group": "Presentation",
+		"labels": [
+			{ "name": "view-any Presentation", "route_name": "presentations.index",   "level": 3 },
+			{ "name": "view Presentation",     "route_name": "presentations.show",    "level": 3 },
+			{ "name": "create Presentation",   "route_name": "presentations.create",  "level": 1 },
+			{ "name": "store Presentation",    "route_name": "presentations.store",   "level": 1 },
+			{ "name": "edit Presentation",     "route_name": "presentations.edit",    "level": 1 },
+			{ "name": "update Presentation",   "route_name": "presentations.update",  "level": 1 },
+			{ "name": "delete Presentation",   "route_name": "presentations.destroy", "level": 1 }
+		]
+	},
+	{
+		"group": "ExchangeRate",
+		"labels": [
+			{ "name": "view-any ExchangeRate", "route_name": "exchange-rates.index",   "level": 3 },
+			{ "name": "view ExchangeRate",     "route_name": "exchange-rates.show",    "level": 3 },
+			{ "name": "create ExchangeRate",   "route_name": "exchange-rates.create",  "level": 1 },
+			{ "name": "store ExchangeRate",    "route_name": "exchange-rates.store",   "level": 1 },
+			{ "name": "edit ExchangeRate",     "route_name": "exchange-rates.edit",    "level": 1 },
+			{ "name": "update ExchangeRate",   "route_name": "exchange-rates.update",  "level": 1 },
+			{ "name": "delete ExchangeRate",   "route_name": "exchange-rates.destroy", "level": 1 }
+		]
+	},
+	{
+		"group": "PaymentMethod",
+		"labels": [
+			{ "name": "view-any PaymentMethod", "route_name": "payment-method.index",   "level": 3 },
+			{ "name": "view PaymentMethod",     "route_name": "payment-method.show",    "level": 3 },
+			{ "name": "create PaymentMethod",   "route_name": "payment-method.create",  "level": 1 },
+			{ "name": "store PaymentMethod",    "route_name": "payment-method.store",   "level": 1 },
+			{ "name": "edit PaymentMethod",     "route_name": "payment-method.edit",    "level": 1 },
+			{ "name": "update PaymentMethod",   "route_name": "payment-method.update",  "level": 1 },
+			{ "name": "delete PaymentMethod",   "route_name": "payment-method.destroy", "level": 1 }
+		]
+	},
+	{
+		"group": "Order",
+		"labels": [
+			{ "name": "view-any Order", "route_name": "orders.index",   "level": 3 },
+			{ "name": "view Order",     "route_name": "orders.show",    "level": 3 },
+			{ "name": "create Order",   "route_name": "orders.create",  "level": 3 },
+			{ "name": "store Order",    "route_name": "orders.store",   "level": 3 },
+			{ "name": "edit Order",     "route_name": "orders.edit",    "level": 2 },
+			{ "name": "update Order",   "route_name": "orders.update",  "level": 2 },
+			{ "name": "delete Order",   "route_name": "orders.destroy", "level": 1 }
+		]
+	},
+	{
+		"group": "Invoice",
+		"labels": [
+			{ "name": "view-any Invoice", "route_name": "invoices.index",   "level": 3 },
+			{ "name": "view Invoice",     "route_name": "invoices.show",    "level": 3 },
+			{ "name": "create Invoice",   "route_name": "invoices.create",  "level": 3 },
+			{ "name": "store Invoice",    "route_name": "invoices.store",   "level": 3 },
+			{ "name": "edit Invoice",     "route_name": "invoices.edit",    "level": 1 },
+			{ "name": "update Invoice",   "route_name": "invoices.update",  "level": 1 },
+			{ "name": "delete Invoice",   "route_name": "invoices.destroy", "level": 1 }
+		]
+	}
+]

@@ -1,66 +1,123 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛵 Mototienda - Sistema de Gestión de Inventario y Ventas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Christian Briceño - Desarrollador Backend Laravel**
+* **Perfil Profesional:** www.linkedin.com/in/christian-briceño-b59085139
+* **Portafolio (GitHub):** https://github.com/christianbriceno/mototienda
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📝 Descripción del Proyecto
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Mototienda** es un sistema de administración web completo, diseñado para gestionar el ciclo de ventas, inventario y usuarios de una tienda de repuestos de motocicletas.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Este proyecto fue desarrollado con **Laravel** y se enfoca en la implementación de una arquitectura de backend robusta, segura y bien estructurada, utilizando **Laravel Filament** para el panel de administración.
 
-## Learning Laravel
+### Módulos y Funcionalidades Principales
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+El sistema abarca las siguientes áreas de negocio, demostrando capacidad para manejar lógica financiera, administrativa y de datos:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* **Panel de Administración:** Toda la gestión se realiza a través de la interfaz moderna y funcional de **Laravel Filament**.
+* **Gestión de Datos Masiva:** Utilización de **acciones de Filament** para **cargar y descargar archivos XLSX** en el módulo de Presentaciones, permitiendo la actualización eficiente de datos de inventario.
+* **Ventas y Finanzas:** Módulos de **Pedidos**, **Facturas**, **Métodos de Pago** y manejo de **Tasas de Cambio** para transacciones multidivisa.
+* **Clientes:** Gestión detallada de **Clientes** (incluyendo el módulo de **Sexos** para datos demográficos).
+* **Inventario:** Gestión de la **Tienda** y las **Presentaciones**.
+* **Administración Central:**
+    * **Usuarios**, **Roles** y **Permisos** (RBAC).
+    * **Notificaciones** internas del sistema.
+    * **ActivityLog** (Registro de Actividad) para auditoría.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🛠️ Stack Tecnológico y Arquitectura
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Este proyecto demuestra un dominio del ecosistema moderno de Laravel y las mejores prácticas de desarrollo.
 
-### Premium Partners
+### Tecnologías Principales
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+* **Lenguaje:** **PHP 8.1**
+* **Framework:** **Laravel 10**
+* **Base de Datos:** **PostgreSQL**
+* **Frontend (UI/UX):** **Laravel Filament** (Panel de Administración) y **Bootstrap 5**.
+* **Dependencias:** **Composer**
 
-## Contributing
+### Diferenciadores y Buenas Prácticas (Keywords Clave)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Característica | Detalle | Habilidad Demostrada |
+| :--- | :--- | :--- |
+| **Panel Admin Avanzado** | Interfaz de administración desarrollada íntegramente con **Laravel Filament**, incluyendo **acciones para manejo de XLSX**. | Eficiencia, manejo de datos masivos e integración de librerías. |
+| **Control de Acceso (RBAC)** | Uso de **Spatie Laravel Permission** para gestión granular de **Roles** y **Permisos**. | Seguridad y control de acceso crítico. |
+| **Auditoría** | Implementación del módulo **ActivityLog** (Spatie) para el seguimiento de todas las acciones del usuario. | Trazabilidad y cumplimiento. |
+| **Calidad de Código** | Aplicación de **Principios SOLID** en la estructura de *Service Classes* y lógica de negocio. | Mantenibilidad y escalabilidad. |
+| **DevOps** | Experiencia en la configuración de entornos con **Docker** (Laravel Sail) y despliegue a producción con **Laravel Forge**. | Gestión completa del ciclo de vida del software. |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🚀 Instalación y Configuración Local
 
-## Security Vulnerabilities
+Sigue estos pasos para poner en marcha el proyecto en tu entorno de desarrollo.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Requisitos
 
-## License
+Necesitas tener **PHP**, **Composer** y una instancia de base de datos **PostgreSQL** o un entorno **Docker** configurado.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. Clonar el Repositorio
+
+```bash
+git clone [https://github.com/christianbriceno/mototienda.git](https://github.com/christianbriceno/mototienda.git)
+
+cd mototienda
+```
+
+### 2. Instalación de Dependencias
+
+```bash
+composer install
+```
+
+### 3. Configuración del Entorno (.env)
+Crea el archivo de configuración y genera la clave de aplicación:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### Importante: Asegúrate de configurar correctamente las credenciales de conexión a tu base de datos PostgreSQL en el archivo .env.
+
+```bash
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=mototienda_db
+DB_USERNAME=tu_usuario_pg
+DB_PASSWORD=tu_password_pg
+
+SUPER_ADMIN_NAME="Admin"
+SUPER_ADMIN_EMAIL="admin@mototienda.com"
+SUPER_ADMIN_PASSWORD="password"
+
+CONSUMIDOR_FINAL_NAME="Consumidor Final"
+CONSUMIDOR_FINAL_LAST_NAME=""
+CONSUMIDOR_FINAL_IDENTIFICATION_CARD="0000000"
+CONSUMIDOR_FINAL_ADDRESS=""
+CONSUMIDOR_FINAL_EMAIL=""
+CONSUMIDOR_FINAL_PHONE=""
+```
+
+### 4. Ejecutar Migraciones y Seeding
+Este paso crea todas las tablas y ejecuta el seeder que configura los roles y crea el usuario Administrador inicial.
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### 5. Ejecutar la Aplicación
+
+```bash
+php artisan serve
+
+npm run dev
+```
+
+## 🤝 Créditos
+Este proyecto fue desarrollado por Christian Briceño como parte de su portafolio de desarrollo backend.

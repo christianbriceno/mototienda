@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DownloadInvoiceController;
+use App\Models\Store;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $store = Store::all()->first();
+    return view('welcome', compact('store'));
 });
+
+Route::get('invoice-download/{invoice}', [DownloadInvoiceController::class, 'download'])->name('invoices.download');
+Route::get('invoice-print/{invoice}', [DownloadInvoiceController::class, 'print'])->name('invoices.print');
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
